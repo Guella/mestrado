@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pylab
 
+#save the data in a np.array
 antonie_ANI = np.genfromtxt("/home/felipe/antonie_com_ANI_compilado.txt", delimiter="\t", names=["xan1","yan1"])
 antonie_NOT = np.genfromtxt("/home/felipe/antonie_sem_ANI_compilado.txt", delimiter="\t", names=["xan2","yan2"])
 archives_ANI = np.genfromtxt("/home/felipe/archives_com_ANI_compilado.txt", delimiter="\t", names=["xar1","yar1"])
@@ -27,6 +28,7 @@ todas_reclassificacoes_ANI = np.genfromtxt("/home/felipe/todas_reclassificacoes_
 todas_reclassificacoes_NOT = np.genfromtxt("/home/felipe/todas_reclassificacoes_sem_ANI_compilado.txt", delimiter="\t", names=["xnor2","ynor2"])
 #print data["x"]
 
+#save the y axis in a culmulative sum
 yan1 = np.cumsum(antonie_ANI["yan1"])
 yan2 = np.cumsum(antonie_NOT["yan2"])
 yar1 = np.cumsum(archives_ANI["yar1"])
@@ -59,7 +61,7 @@ plt.yscale('symlog')
 
 myticks = [0,1,10,100,1000,10000]
 ax.set_yticklabels(myticks)
-
+#plot each line
 ax.plot(antonie_ANI["xan1"], yan1, 'k', linestyle='-', marker='o', linewidth=2, label ='antonie with ANI')
 ax.plot(antonie_NOT["xan2"], yan2, 'k', linestyle='--', marker='s', linewidth=2, label ='antonie without ANI')
 ax.plot(archives_ANI["xar1"], yar1, 'b', linestyle='-', marker='o', linewidth=2, label ='archives with ANI')
@@ -85,4 +87,6 @@ ax.plot(sam_NOT["xsa2"], ysa2, 'g', linestyle='--', marker='s', linewidth=2, lab
 #ax.plot(todas_reclassificacoes_NOT["xnor2"], ynor2, 'k|', linewidth=3, label ='sp nov rec without ANI')
 
 lgd = plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+
+#save my plot
 plt.savefig('/home/felipe/myplot.svg', bbox_extra_artists=(lgd,), bbox_inches='tight')
